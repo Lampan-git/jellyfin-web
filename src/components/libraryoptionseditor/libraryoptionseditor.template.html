@@ -24,6 +24,13 @@
 <div class="inputContainer fldSeasonZeroDisplayName hide advanced">
     <input is="emby-input" type="text" id="txtSeasonZeroName" label="${LabelSpecialSeasonsDisplayName}" value="Specials" required />
 </div>
+<div class="checkboxContainer checkboxContainer-withDescription chkPreferOriginalTitlesContainer hide advanced">
+    <label>
+        <input is="emby-checkbox" type="checkbox" id="chkPreferOriginalTitles" />
+        <span>${PreferOriginalTitlesOverLocalized}</span>
+    </label>
+    <div class="fieldDescription checkboxFieldDescription">${PreferOriginalTitlesOverLocalizedHelp}</div>
+</div>
 <div class="checkboxContainer checkboxContainer-withDescription chkEnableEmbeddedTitlesContainer hide advanced">
     <label>
         <input is="emby-checkbox" type="checkbox" id="chkEnableEmbeddedTitles" />

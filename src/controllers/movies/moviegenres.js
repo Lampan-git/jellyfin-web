@@ -68,7 +68,7 @@ export default function (view, params, tabContent) {
             SortOrder: 'Ascending',
             IncludeItemTypes: 'Movie',
             Recursive: true,
-            Fields: 'PrimaryImageAspectRatio,MediaSourceCount',
+            Fields: 'PrimaryImageAspectRatio,MediaSourceCount,PreferredName',
             ImageTypeLimit: 1,
             EnableImageTypes: enableImageTypes,
             Limit: limit,

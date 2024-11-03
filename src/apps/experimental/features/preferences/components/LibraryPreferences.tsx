@@ -110,6 +110,23 @@ export function LibraryPreferences({ onChange, values }: Readonly<LibraryPrefere
                     {globalize.translate('DisplayMissingEpisodesWithinSeasonsHelp')}
                 </FormHelperText>
             </FormControl>
+
+            <FormControl fullWidth>
+                <FormControlLabel
+                    aria-describedby='display-settings-override-preferred-name-description'
+                    control={
+                        <Checkbox
+                            checked={values.overridePreferredName}
+                            onChange={onChange}
+                        />
+                    }
+                    label={globalize.translate('OverridePreferredName')}
+                    name='overridePreferredName'
+                />
+                <FormHelperText id='display-settings-override-preferred-name-description'>
+                    {globalize.translate('OverridePreferredNameHelp')}
+                </FormHelperText>
+            </FormControl>
         </Stack>
     );
 }

@@ -528,12 +528,12 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
                 lines.push(getTextActionButton({
                     Id: item.SeriesId,
                     ServerId: serverId,
-                    Name: item.SeriesName,
+                    Name: (item.PreferredSeriesName || item.SeriesName),
                     Type: 'Series',
                     IsFolder: true
                 }));
             } else {
-                lines.push(escapeHtml(item.SeriesName));
+                lines.push(escapeHtml(item.PreferredSeriesName || item.SeriesName));
             }
         } else if (isUsingLiveTvNaming(item.Type)) {
             lines.push(escapeHtml(item.Name));
@@ -542,7 +542,7 @@ function getCardFooterText(item, apiClient, options, footerClass, progressHtml, 
                 titleAdded = true;
             }
         } else {
-            const parentTitle = item.SeriesName || item.Series || item.Album || item.AlbumArtist || '';
+            const parentTitle = item.PreferredSeriesName || item.SeriesName || item.Series || item.Album || item.AlbumArtist || '';
 
             if (parentTitle || showTitle) {
                 lines.push(escapeHtml(parentTitle));

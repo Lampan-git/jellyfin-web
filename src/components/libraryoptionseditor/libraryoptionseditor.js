@@ -449,9 +449,11 @@ export function setContentType(parent, contentType) {
     }
 
     if (contentType === 'books' || contentType === 'boxsets' || contentType === 'playlists' || contentType === 'music') {
+        parent.querySelector('.chkPreferOriginalTitlesContainer').classList.add('hide');
         parent.querySelector('.chkEnableEmbeddedTitlesContainer').classList.add('hide');
         parent.querySelector('.chkEnableEmbeddedExtrasTitlesContainer').classList.add('hide');
     } else {
+        parent.querySelector('.chkPreferOriginalTitlesContainer').classList.remove('hide');
         parent.querySelector('.chkEnableEmbeddedTitlesContainer').classList.remove('hide');
         if (parent.querySelector('#chkEnableEmbeddedTitles').checked) {
             parent.querySelector('.chkEnableEmbeddedExtrasTitlesContainer').classList.remove('hide');
@@ -593,6 +595,7 @@ export function getLibraryOptions(parent) {
         EnableEmbeddedTitles: parent.querySelector('#chkEnableEmbeddedTitles').checked,
         EnableEmbeddedExtrasTitles: parent.querySelector('#chkEnableEmbeddedExtrasTitles').checked,
         EnableEmbeddedEpisodeInfos: parent.querySelector('#chkEnableEmbeddedEpisodeInfos').checked,
+        PreferOriginalTitles: parent.querySelector('#chkPreferOriginalTitles').checked,
         AllowEmbeddedSubtitles: parent.querySelector('#selectAllowEmbeddedSubtitles').value,
         SkipSubtitlesIfEmbeddedSubtitlesPresent: parent.querySelector('#chkSkipIfGraphicalSubsPresent').checked,
         SkipSubtitlesIfAudioTrackMatches: parent.querySelector('#chkSkipIfAudioTrackPresent').checked,
@@ -661,6 +664,7 @@ export function setLibraryOptions(parent, options) {
     parent.querySelector('.chkEnableEmbeddedExtrasTitlesContainer').classList.toggle('hide', !options.EnableEmbeddedTitles);
     parent.querySelector('#chkEnableEmbeddedExtrasTitles').checked = options.EnableEmbeddedExtrasTitles;
     parent.querySelector('#chkEnableEmbeddedEpisodeInfos').value = options.EnableEmbeddedEpisodeInfos;
+    parent.querySelector('#chkPreferOriginalTitles').checked = options.PreferOriginalTitles;
     parent.querySelector('#selectAllowEmbeddedSubtitles').value = options.AllowEmbeddedSubtitles;
     parent.querySelector('#chkSkipIfGraphicalSubsPresent').checked = options.SkipSubtitlesIfEmbeddedSubtitlesPresent;
     parent.querySelector('#chkSaveSubtitlesLocally').checked = options.SaveSubtitlesWithMedia;

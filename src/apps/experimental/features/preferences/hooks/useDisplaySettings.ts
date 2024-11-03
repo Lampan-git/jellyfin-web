@@ -82,6 +82,7 @@ async function loadDisplaySettings({
         dateTimeLocale: settings.dateTimeLocale() || 'auto',
         disableCustomCss: Boolean(settings.disableCustomCss()),
         displayMissingEpisodes: user?.Configuration?.DisplayMissingEpisodes ?? false,
+        overridePreferredName: user?.Configuration?.OverridePreferredName ?? false,
         enableBlurHash: Boolean(settings.enableBlurhash()),
         enableFasterAnimation: Boolean(settings.enableFastFadein()),
         enableItemDetailsBanner: Boolean(settings.detailsBanner()),
@@ -149,6 +150,7 @@ async function saveDisplaySettings({
 
     if (user.Id && user.Configuration) {
         user.Configuration.DisplayMissingEpisodes = newDisplaySettings.displayMissingEpisodes;
+        user.Configuration.OverridePreferredName = newDisplaySettings.overridePreferredName;
         promises.push(api.updateUserConfiguration(user.Id, user.Configuration));
     }
 

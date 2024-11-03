@@ -219,7 +219,7 @@ function getSearchResultHtml(result, index) {
     if (result.ImageUrl) {
         html += `<div class="cardImageContainer coveredImage" style="background-image:url('${result.ImageUrl}');"></div>`;
     } else {
-        html += `<div class="cardImageContainer coveredImage defaultCardBackground defaultCardBackground1"><div class="cardText cardCenteredText">${escapeHtml(result.Name)}</div></div>`;
+        html += `<div class="cardImageContainer coveredImage defaultCardBackground defaultCardBackground1"><div class="cardText cardCenteredText">${escapeHtml((result.PreferredName || result.Name))}</div></div>`;
     }
     html += '</div>';
     html += '</div>';
@@ -229,7 +229,7 @@ function getSearchResultHtml(result, index) {
         numLines++;
     }
 
-    const lines = [result.Name];
+    const lines = [(result.PreferredName || result.Name)];
 
     lines.push(result.SearchProviderName);
 

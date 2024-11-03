@@ -23,7 +23,7 @@ export default function (view, params, tabContent) {
                     SortOrder: 'Ascending',
                     IncludeItemTypes: 'Episode',
                     Recursive: true,
-                    Fields: 'PrimaryImageAspectRatio,MediaSourceCount',
+                    Fields: 'PrimaryImageAspectRatio,MediaSourceCount,PreferredName',
                     IsMissing: false,
                     ImageTypeLimit: 1,
                     EnableImageTypes: 'Primary,Backdrop,Thumb',

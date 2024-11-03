@@ -425,13 +425,13 @@ function renderName(item, container, context) {
         parentNameHtml.push(getArtistLinksHtml(item.ArtistItems, item.ServerId, context));
         parentNameLast = true;
     } else if (item.SeriesName && item.Type === 'Episode') {
-        parentNameHtml.push(`<a style="color:inherit;" class="button-link itemAction" is="emby-linkbutton" href="#" data-action="link" data-id="${item.SeriesId}" data-serverid="${item.ServerId}" data-type="Series" data-isfolder="true">${escapeHtml(item.SeriesName)}</a>`);
+        parentNameHtml.push(`<a style="color:inherit;" class="button-link itemAction" is="emby-linkbutton" href="#" data-action="link" data-id="${item.SeriesId}" data-serverid="${item.ServerId}" data-type="Series" data-isfolder="true">${escapeHtml(item.PreferredSeriesName || item.SeriesName)}</a>`);
     } else if (item.IsSeries || item.EpisodeTitle) {
-        parentNameHtml.push(escapeHtml(item.Name));
+        parentNameHtml.push(escapeHtml(item.PreferredName || item.Name));
     }
 
     if (item.SeriesName && item.Type === 'Season') {
-        parentNameHtml.push(`<a style="color:inherit;" class="button-link itemAction" is="emby-linkbutton" href="#" data-action="link" data-id="${item.SeriesId}" data-serverid="${item.ServerId}" data-type="Series" data-isfolder="true">${escapeHtml(item.SeriesName)}</a>`);
+        parentNameHtml.push(`<a style="color:inherit;" class="button-link itemAction" is="emby-linkbutton" href="#" data-action="link" data-id="${item.SeriesId}" data-serverid="${item.ServerId}" data-type="Series" data-isfolder="true">${escapeHtml(item.PreferredSeriesName || item.SeriesName)}</a>`);
     } else if (item.ParentIndexNumber != null && item.Type === 'Episode') {
         parentNameHtml.push(`<a style="color:inherit;" class="button-link itemAction" is="emby-linkbutton" href="#" data-action="link" data-id="${item.SeasonId}" data-serverid="${item.ServerId}" data-type="Season" data-isfolder="true">${escapeHtml(item.SeasonName)}</a>`);
     } else if (item.ParentIndexNumber != null && item.IsSeries) {
@@ -476,8 +476,10 @@ function renderName(item, container, context) {
         html = '<h1 class="itemName infoText parentNameLast"><bdi>' + name + '</bdi></h1>' + html;
     }
 
-    if (item.OriginalTitle && item.OriginalTitle != item.Name) {
+    if (item.OriginalTitle && item.OriginalTitle != (item.PreferredName || item.Name)) {
         html += '<h4 class="itemName infoText originalTitle">' + escapeHtml(item.OriginalTitle) + '</h4>';
+    } else if (item.OriginalTitle && item.OriginalTitle == item.PreferredName) {
+        html += '<h4 class="itemName infoText originalTitle">' + escapeHtml(item.Name) + '</h4>';
     }
 
     container.innerHTML = html;
@@ -775,7 +777,7 @@ function renderNextUp(page, item, user) {
     ServerConnections.getApiClient(item.ServerId).getNextUpEpisodes({
         SeriesId: item.Id,
         UserId: user.Id,
-        Fields: 'MediaSourceCount'
+        Fields: 'MediaSourceCount,PreferredName'
     }).then(function (result) {
         if (result.Items.length) {
             section.classList.remove('hide');
@@ -1139,7 +1141,7 @@ function renderMoreFromSeason(view, item, apiClient) {
         apiClient.getEpisodes(item.SeriesId, {
             SeasonId: item.SeasonId,
             UserId: userId,
-            Fields: 'ItemCounts,PrimaryImageAspectRatio,CanDelete,MediaSourceCount'
+            Fields: 'ItemCounts,PrimaryImageAspectRatio,CanDelete,MediaSourceCount,PreferredName'
         }).then(function (result) {
             if (result.Items.length < 2) {
                 section.classList.add('hide');
@@ -1241,7 +1243,7 @@ function renderSimilarItems(page, item, context) {
         const options = {
             userId: apiClient.getCurrentUserId(),
             limit: 12,
-            fields: 'PrimaryImageAspectRatio,CanDelete'
+            fields: 'PrimaryImageAspectRatio,CanDelete,PreferredName'
         };
 
         if (item.Type == 'MusicAlbum' && item.AlbumArtists && item.AlbumArtists.length) {
@@ -1336,7 +1338,7 @@ function renderTags(page, item) {
 }
 
 function renderChildren(page, item) {
-    let fields = 'ItemCounts,PrimaryImageAspectRatio,CanDelete,MediaSourceCount';
+    let fields = 'ItemCounts,PrimaryImageAspectRatio,CanDelete,MediaSourceCount,PreferredName';
     const query = {
         ParentId: item.Id,
         Fields: fields

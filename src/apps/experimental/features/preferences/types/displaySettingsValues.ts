@@ -4,6 +4,7 @@ export interface DisplaySettingsValues {
     dateTimeLocale: string;
     disableCustomCss: boolean;
     displayMissingEpisodes: boolean;
+    overridePreferredName: boolean;
     enableBlurHash: boolean;
     enableFasterAnimation: boolean;
     enableItemDetailsBanner: boolean;

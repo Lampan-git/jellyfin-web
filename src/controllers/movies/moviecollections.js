@@ -19,7 +19,7 @@ export default function (view, params, tabContent) {
                     SortOrder: 'Ascending',
                     IncludeItemTypes: 'BoxSet',
                     Recursive: true,
-                    Fields: 'PrimaryImageAspectRatio,SortName',
+                    Fields: 'PrimaryImageAspectRatio,SortName,PreferredName',
                     ImageTypeLimit: 1,
                     EnableImageTypes: 'Primary,Backdrop,Banner,Thumb',
                     StartIndex: 0

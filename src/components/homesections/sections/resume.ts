@@ -28,7 +28,7 @@ function getItemsToResumeFn(
         const options = {
             Limit: limit,
             Recursive: true,
-            Fields: 'PrimaryImageAspectRatio',
+            Fields: 'PrimaryImageAspectRatio,PreferredName',
             ImageTypeLimit: 1,
             EnableImageTypes: 'Primary,Backdrop,Thumb',
             EnableTotalRecordCount: false,

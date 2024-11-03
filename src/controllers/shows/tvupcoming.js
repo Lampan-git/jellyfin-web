@@ -14,7 +14,7 @@ function getUpcomingPromise(context, params) {
     loading.show();
     const query = {
         Limit: 48,
-        Fields: 'AirTime',
+        Fields: 'AirTime,PreferredName',
         UserId: ApiClient.getCurrentUserId(),
         ImageTypeLimit: 1,
         EnableImageTypes: 'Primary,Backdrop,Banner,Thumb',
